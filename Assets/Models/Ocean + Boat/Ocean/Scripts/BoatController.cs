@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class BoatController : Boyancy{
 
+	[Header("Boat Attributes :")]
+	[SerializeField] private float incrementSpeedFactor;
 	[Header("Physic :")]
 	[SerializeField] private float m_accelerationFactor = 2.0F;
 	[SerializeField] private float m_turningFactor = 2.0F;
@@ -66,8 +68,9 @@ public class BoatController : Boyancy{
 	protected override void FixedUpdate()
 	{
 		base.FixedUpdate();
-
-		m_rigidbody.AddRelativeForce(Vector3.forward * m_accelerationFactor);
+		if ((int)Time.timeSinceLevelLoad % 20 == 0)
+			incrementSpeedFactor += Time.fixedDeltaTime / 10f;
+		m_rigidbody.AddRelativeForce(Vector3.forward * incrementSpeedFactor * m_accelerationFactor);
         m_rigidbody.AddRelativeTorque(
 			m_verticalInput * -m_accelerationTorqueFactor,
 			m_horizontalInput * m_turningFactor,

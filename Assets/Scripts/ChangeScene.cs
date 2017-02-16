@@ -18,4 +18,8 @@ public class ChangeScene : MonoBehaviour {
 	public void ChangeSceneFunc (string name) {
 		SceneManager.LoadScene (name);
 	}
+
+	public void Quit () {
+		Application.Quit ();
+	}
 }
