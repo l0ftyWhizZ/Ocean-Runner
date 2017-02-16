@@ -16,6 +16,9 @@ public class ChangeScene : MonoBehaviour {
 	}
 
 	public void ChangeSceneFunc (string name) {
+		GameObject boatHolder = GameObject.Find ("Boat").transform.GetChild (1).gameObject;
+		boatHolder.transform.SetParent (null);
+		DontDestroyOnLoad (boatHolder);
 		SceneManager.LoadScene (name);
 	}
 
