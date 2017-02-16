@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BoatSelection : MonoBehaviour {
 	public GameObject[] boats;
-	public GameObject currentBoat;
 	public int index = 0;
 	// Use this for initialization
 	void Start () {
@@ -14,11 +13,7 @@ public class BoatSelection : MonoBehaviour {
 		boats [index].SetActive (true);
 
 	}
-
-	void Update () {
-		currentBoat = boats [index];
-	}
-
+		
 	public void SwitchBoatFunc (int direction) {
 		index += direction;
 		if (index < 0)
