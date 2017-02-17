@@ -4,26 +4,37 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopScript : MonoBehaviour {
+	public GameObject[] componentsToDisable;
+
 	[SerializeField]
-	private GameObject[] componentsToDisable;
+	private AnimationScript animationScript;
+
+	public bool goBack = false;
 	// Use this for initialization
 	public void OnClick () {
-		foreach (GameObject obj in componentsToDisable) {
-			obj.SetActive (false);
-		}
-
-		transform.GetChild (1).gameObject.SetActive (true);
+		animationScript.RotateUI (1);
 	}
 
 	public void goBackToMenu() {
-		foreach (GameObject obj in componentsToDisable) {
-			obj.SetActive (true);
-		}
-
-		transform.GetChild (1).gameObject.SetActive (false);
+		animationScript.doneRotation = false;
+		animationScript.RotateUI (0);
+		goBack = true;
 	}
 
 	void Update () {
+		if (animationScript.doneRotation) {
+			foreach (GameObject obj in componentsToDisable) {
+				obj.SetActive (false);
+			}
+			transform.GetChild (1).gameObject.SetActive (true);
+		}
 
+		if (goBack) {
+			foreach (GameObject obj in componentsToDisable) {
+				obj.SetActive (true);
+			}
+			transform.GetChild (1).gameObject.SetActive (false);
+			goBack = false;
+		}
 	}
 }
