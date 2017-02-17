@@ -22,4 +22,8 @@ public class ShopScript : MonoBehaviour {
 
 		transform.GetChild (1).gameObject.SetActive (false);
 	}
+
+	void Update () {
+
+	}
 }

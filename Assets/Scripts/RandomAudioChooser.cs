@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RandomAudioChooser : MonoBehaviour {
-
+	[SerializeField]
+	private AudioSource buttonClick;
 	[SerializeField]
 	private AudioClip[] audioClips;
 
@@ -16,7 +17,7 @@ public class RandomAudioChooser : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	public void OnClick () {
+		buttonClick.PlayOneShot (buttonClick.clip);
 	}
 }
