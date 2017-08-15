@@ -6,13 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class BoundSpawner : MonoBehaviour {
 
-	private int index = 0;
+	[SerializeField] private GameObject[] tilePrefabs;
+	private int currentSelectedTile = 0;
+
 	void Start () {
 		
-	}
-	
-	void Fixedupdate () {
-
 	}
 
 	void Update () {
