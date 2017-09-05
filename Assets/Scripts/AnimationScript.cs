@@ -23,7 +23,7 @@ public class AnimationScript : MonoBehaviour {
 	void Update () {
 		if (rotated) {
 			foreach (GameObject ui in shop.componentsToDisable) {
-				ui.transform.eulerAngles = Vector3.Lerp(ui.transform.rotation.eulerAngles, Vector3.up * 90f * directionOfRotation, Time.deltaTime * 5);
+				ui.transform.eulerAngles = Vector3.Lerp(ui.transform.rotation.eulerAngles, Vector3.up * 90f * directionOfRotation, Time.deltaTime * 10f);
 				if (Mathf.Abs(ui.transform.eulerAngles.y - 90f) <= 1f ) {
 					doneRotation = true;
 					rotated = false;

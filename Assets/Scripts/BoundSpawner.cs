@@ -9,15 +9,26 @@ public class BoundSpawner : MonoBehaviour {
 	[SerializeField] private GameObject[] tilePrefabs;
 	public GameObject currentSelectedTile;
 
+	private Vector3 eulerAngles = Vector3.zero;
+
 	void Start () {
-		currentSelectedTile = tilePrefabs [0];
-		GameObject firstTile = (GameObject) Instantiate (currentSelectedTile);
-		firstTile.transform.position = new Vector3 (0f, 50f, -2750f);
+		GameObject firstTile = (GameObject)Instantiate (tilePrefabs [0]);
+		firstTile.transform.position = new Vector3 (0f, 50f, 0f);
+		currentSelectedTile = firstTile;
+
+		InvokeRepeating ("SpawnTile", 0f, 5f);
 	}
 		
-	public GameObject SpawnTile () {
+	public void SpawnTile () {
 		int randomIndex = Random.Range (0, tilePrefabs.Length);
 		GameObject newTile = (GameObject)Instantiate (tilePrefabs[randomIndex]);
-		return newTile;
+		Destroy (newTile, 15f);
+		newTile.transform.position = currentSelectedTile.transform.GetChild(2).position;
+
+		eulerAngles = newTile.transform.rotation.eulerAngles;
+		eulerAngles += new Vector3(0f, currentSelectedTile.GetComponent<TileParams> ().yRotationOffset, 0f);
+		newTile.transform.rotation = Quaternion.Euler (eulerAngles);
+		newTile.GetComponent<TileParams> ().yRotationOffset = (int) newTile.transform.rotation.eulerAngles.y;
+		currentSelectedTile = newTile;
 	}
 }
