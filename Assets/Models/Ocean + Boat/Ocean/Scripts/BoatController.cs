@@ -26,6 +26,14 @@ public class BoatController : Boyancy{
     private Rigidbody m_rigidbody;
 	private Vector3 m_androidInputInit;
 
+	void OnCollisionEnter (Collision col) {
+		if (col.gameObject.tag == "Ramp") {
+			col.collider.enabled = false;
+			m_rigidbody.AddRelativeForce(Vector3.forward * 3000f);
+			m_rigidbody.AddRelativeForce(Vector3.up * 3000f);
+		}
+	}
+
     protected override void Start()
     {
         base.Start();

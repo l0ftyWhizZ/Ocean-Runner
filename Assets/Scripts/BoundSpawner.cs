@@ -13,16 +13,15 @@ public class BoundSpawner : MonoBehaviour {
 
 	void Start () {
 		GameObject firstTile = (GameObject)Instantiate (tilePrefabs [0]);
-		firstTile.transform.position = new Vector3 (0f, 50f, 0f);
+		firstTile.transform.position = new Vector3 (0f, 50f, -1750f);
 		currentSelectedTile = firstTile;
-
-		InvokeRepeating ("SpawnTile", 0f, 5f);
+		StartCoroutine (WaitBeforeSpawn (5f));
 	}
 		
 	public void SpawnTile () {
 		int randomIndex = Random.Range (0, tilePrefabs.Length);
 		GameObject newTile = (GameObject)Instantiate (tilePrefabs[randomIndex]);
-		Destroy (newTile, 15f);
+		Destroy (newTile, 20f);
 		newTile.transform.position = currentSelectedTile.transform.GetChild(2).position;
 
 		eulerAngles = newTile.transform.rotation.eulerAngles;
@@ -30,5 +29,10 @@ public class BoundSpawner : MonoBehaviour {
 		newTile.transform.rotation = Quaternion.Euler (eulerAngles);
 		newTile.GetComponent<TileParams> ().yRotationOffset = (int) newTile.transform.rotation.eulerAngles.y;
 		currentSelectedTile = newTile;
+	}
+
+	IEnumerator WaitBeforeSpawn (float seconds) {
+		yield return new WaitForSeconds (seconds);
+		InvokeRepeating ("SpawnTile", 0f, 10f);
 	}
 }
