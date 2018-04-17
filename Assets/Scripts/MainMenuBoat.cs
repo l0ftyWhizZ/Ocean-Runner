@@ -64,7 +64,7 @@ public class MainMenuBoat: Boyancy{
 			m_horizontalInput * m_turningFactor,
 			m_horizontalInput * -m_turningTorqueFactor
 		);
-		if ((int)Time.timeSinceLevelLoad % 3 == 0)
-			m_horizontalInput = Random.Range (-1, 2);
+		if ((int)Time.timeSinceLevelLoad % 5 == 0)
+			m_horizontalInput = Random.Range (-0.2f, 0.2f);
 	}
 }
